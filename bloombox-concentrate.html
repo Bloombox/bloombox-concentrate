@@ -28,7 +28,7 @@
 <link rel="import" href="../bloombox-styles/bloombox-styles.html">
 <link rel="import" href="../bloombox-testing/bloombox-testing.html">
 <link rel="import" href="../bloombox-product/bloombox-product.html">
-<link rel="import" href="../bloombox-pricelist/bloombox-price.html">
+<link rel="import" href="../bloombox-pricelist/bloombox-pricelist.html">
 
 
 <dom-module id="bloombox-concentrate">
@@ -93,11 +93,10 @@
 
           <!-- Price List -->
           <div class="row pricelist">
-            <bloombox-price
-              class="concentrateSealedPrice"
-              price="[[pricing.unit.value]]"
-              available="[[pricing.unit.available]]"
-              currency="$"></bloombox-price>
+            <bloombox-pricelist
+              class="concentrateSealedPricelist"
+              manifest="[[pricing]]"
+              currency="$"></bloombox-pricelist>
           </div><!-- end div.row.pricelist -->
           <template is="dom-if" if="[[!visible]]">
             <div class="not-in-stock-overlay not-in-stock"></div><!-- end div.not-in-stock-overlay -->
@@ -111,7 +110,7 @@
     </template>
 
     <template is="dom-if" if="[[zerostate]]">
-      <paper-card header="Concentrate" class="product-card concentrate-product zerostate fullwidth">
+      <paper-card heading="Concentrate" class="product-card concentrate-product zerostate fullwidth">
         <div class="card-content">
           <div class="basic-info row">
             <!-- Name & Description -->
@@ -181,12 +180,11 @@
 
           <!-- Price List -->
           <div class="row pricelist">
-            <bloombox-price
+            <bloombox-pricelist
               id="editablePrice"
               editable
-              price="{{pricing.unit.value}}"
-              available="{{pricing.unit.available}}"
-              currency="$"></bloombox-price>
+              manifest="[[pricing]]"
+              currency="$"></bloombox-pricelist>
           </div><!-- end div.row.pricelist -->
         </div><!-- end div.card-content -->
 
