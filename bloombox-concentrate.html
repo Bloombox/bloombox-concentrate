@@ -66,7 +66,7 @@
             <iron-label class="bogo-label" hidden$="[[!bogo]]"><span>Buy One Get One</span></iron-label>
 
             <!-- Type Label -->
-            <iron-label class="type-label"><span>[[type]]</span></iron-label>
+            <iron-label class="type-label"><span>[[_renderTypeLabel(type)]]</span></iron-label>
 
             <!-- Vegan -->
             <iron-label class="vegan-label" hidden$="[[!vegan]]"><span>Vegan</span></iron-label>
@@ -123,12 +123,12 @@
             <paper-input id="nameField" placeholder="Product Name" value="{{name}}" required no-label-float name="name" class="form-item concentrate-name"></paper-input>
             <paper-textarea id="descriptionField" label="Description" value="{{description}}" no-label-float name="description" class="form-item concentrate-description"></paper-textarea>
             <paper-dropdown-menu id="typeField" label="Concentrate Type" class="form-item" noink no-label-float required name="type">
-              <paper-listbox class="dropdown-content" selected="{{type}}">
-                <paper-item>Oil</paper-item>
-                <paper-item>Wax</paper-item>
-                <paper-item>Shatter</paper-item>
-                <paper-item>Hash (Traditional)</paper-item>
-                <paper-item>Hash (Bubble)</paper-item>
+              <paper-listbox class="dropdown-content" selected="{{type}}" attr-for-selected="key">
+                <paper-item key="concentrate-oil">Oil</paper-item>
+                <paper-item key="concentrate-wax">Wax</paper-item>
+                <paper-item key="concentrate-shatter">Shatter</paper-item>
+                <paper-item key="hash-traditional">Hash (Traditional)</paper-item>
+                <paper-item key="hash-bubble">Hash (Bubble)</paper-item>
               </paper-listbox>
             </paper-dropdown-menu><!-- end paper-dropdown-menu#typeField -->
           </div><!-- end .row.basic-info -->
@@ -276,6 +276,27 @@
           reformatted.push({"label": i, "available": v.available, "price": v.value});
         }
         return reformatted;
+      },
+
+      /**
+       * Render a human-readable label for a `type`.
+       */
+      _renderTypeLabel: function(type) {
+        if (type.indexOf("-oil")) {
+          return "Oil";
+        }
+        if (type.indexOf("-wax")) {
+          return "Wax";
+        }
+        if (type.indexOf("-shatter")) {
+          return "Shatter";
+        }
+        if (type.indexOf("hash-") == 0) {
+          if (type.indexOf("-traditional")) {
+            return "Hash: Traditional";
+          }
+          return "Hash: Bubble";
+        }
       },
 
       /**
