@@ -33,7 +33,6 @@
         <template>
           <bloombox-concentrate
             key="sample1"
-            partner="abatin"
             environment="sandbox"
             display-mode="normal"
             brand="WW"
@@ -54,12 +53,36 @@
     </div>
 
     <div class="vertical-section-container centered">
+      <h3>Data Example (object pricing)</h3>
+      <demo-snippet>
+        <template>
+          <bloombox-concentrate
+            key="sample1"
+            environment="sandbox"
+            display-mode="normal"
+            brand="WW"
+            type="Wax"
+            name="Cherry AK47"
+            species="Sativa"
+            photos='["test.jpg"]'
+            description="This potent wax will enhance your flower experience very nicely."
+            tests='{"cbd":4.8,"thc":61.8}'
+            pricing='{"halfgram":{"available":true,"price":18},"gram":{"available":false,"price":55}}'
+            sale="20"
+            bogo="true"
+            visible="true"
+            premium="true"
+            partner="mm"></bloombox-concentrate>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
       <h3>Data Example (slim display mode)</h3>
       <demo-snippet>
         <template>
           <bloombox-concentrate
             key="sample2"
-            partner="abatin"
             environment="sandbox"
             display-mode="slim"
             brand="WW"

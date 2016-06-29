@@ -100,7 +100,7 @@
           <div class="row pricelist">
             <bloombox-pricelist
               class="concentrateSealedPricelist"
-              manifest="[[pricing]]"
+              manifest="[[_formatManifest(pricing)]]"
               currency="$"></bloombox-pricelist>
           </div><!-- end div.row.pricelist -->
           <template is="dom-if" if="[[!visible]]">
@@ -199,7 +199,7 @@
             <bloombox-pricelist
               id="editablePrice"
               editable
-              manifest="[[pricing]]"
+              manifest="[[_formatManifest(pricing)]]"
               currency="$"></bloombox-pricelist>
           </div><!-- end div.row.pricelist -->
         </div><!-- end div.card-content -->
@@ -260,6 +260,22 @@
             return [{"label": "halfgram", "available": true, "price": 0}, {"label": "gram", "available": true, "price": 0}];
           }
         }
+      },
+
+      /**
+       * Small fix for object-based concentrate pricing.
+       */
+      _formatManifest: function(pricelist) {
+        var reformatted, i, v;
+        if (Array.isArray(pricelist)) {
+          return pricelist;
+        }
+        reformatted = [];
+        for (i in pricelist) {
+          v = pricelist[i];
+          reformatted.push({"label": i, "available": v.available, "price": v.price});
+        }
+        return reformatted;
       },
 
       /**
