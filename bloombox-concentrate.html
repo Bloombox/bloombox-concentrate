@@ -235,11 +235,12 @@
         /**
          * String value of the `type` of this current item. This property varies by item type.
          * In `<bloombox-concentrate>`'s case, the following values are selectable:
-         * - `Oil`
-         * - `Wax`
-         * - `Shatter`
-         * - `Hash (Traditional)`
-         * - `Hash (Bubble)`
+         * - `concentrate-oil`
+         * - `concentrate-wax`
+         * - `concentrate-shatter`
+         * - `concentrate-kief`
+         * - `hash-traditional`
+         * - `hash-bubble`
          */
         type: {
           type: String,
@@ -282,17 +283,20 @@
        * Render a human-readable label for a `type`.
        */
       _renderTypeLabel: function(type) {
-        if (type.indexOf("-oil")) {
+        if (type.indexOf("-oil") != -1) {
           return "Oil";
         }
-        if (type.indexOf("-wax")) {
+        if (type.indexOf("-wax") != -1) {
           return "Wax";
         }
-        if (type.indexOf("-shatter")) {
+        if (type.indexOf("-shatter") != -1) {
           return "Shatter";
         }
+        if (type.indexOf("-kief") != -1) {
+          return "Kief";
+        }
         if (type.indexOf("hash-") == 0) {
-          if (type.indexOf("-traditional")) {
+          if (type.indexOf("-traditional") != -1) {
             return "Hash: Traditional";
           }
           return "Hash: Bubble";
