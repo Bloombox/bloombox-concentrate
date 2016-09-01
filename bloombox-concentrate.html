@@ -260,7 +260,8 @@
     function defaultTestConfig() {
       return {
         thc: 0.0,
-        cbd: 0.0
+        cbd: 0.0,
+        mode: '%'
       };
     }
 
@@ -360,11 +361,12 @@
         payload.brand = this.get("brand");
         payload.type = this.get("type");
         payload.photos = this.get("photos") || [];
-        payload.pricing = this.$$(".concentrateSealedPricelist").readManifest();
+        payload.pricing = this.$$(".concentrateSealedPricelist").readManifest(true);
 
         // handle test results
         if (this.get("tests") !== undefined && this.get("tests") != null) {
           payload.tests = {
+            mode: this.get("tests").mode,
             thc: this.get("tests").thc,
             cbd: this.get("tests").cbd
           };
@@ -404,7 +406,7 @@
         // handle required fields
         payload.name = this.$$("#nameField").value;
         payload.brand = this.$$("#brandField").value;
-        payload.type = this.$$("#typeField").value;
+        payload.type = this.$$("#typeField").selectedItem.getAttribute("key");
 
         if (this.get("photos") && this.get("photos").length > 0)
           payload.photos = this.get("photos");
@@ -414,11 +416,12 @@
           testing = this.$$("#productTesting");
           payload.tests = {
             thc: testing.thc,
-            cbd: testing.cbd
+            cbd: testing.cbd,
+            mode: '%'
           };
         }
 
-        payload.pricing = pricelistObj.readManifest();
+        payload.pricing = pricelistObj.readManifest(true);
 
         // handle optional fields
         if (this.$$("#premiumToggle").checked) {
