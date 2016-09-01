@@ -108,7 +108,6 @@
           <div class="product-media concentrate-media row">
             <div class="bloombox-media-wrap">
               <bloombox-media
-                hidden$="[[_shouldHideImage()]]"
                 disabled
                 partner="[[partner]]"
                 environment="[[environment]]"
@@ -426,13 +425,6 @@
         if (this.$$("#premiumToggle").checked) {
           payload.flags = payload.flags || {};
           payload.flags.premium = true;
-        }
-        if (this.$$("#showToggle").checked) {
-          payload.flags = payload.flags || {};
-          payload.flags.visible = true;
-        } else {
-          payload.flags = payload.flags || {};
-          payload.flags.visible = false;
         }
         if (this.$$("#descriptionField").value !== undefined && this.$$("#descriptionField").value.length > 0)
           payload.description = this.$$("#descriptionField").value;
