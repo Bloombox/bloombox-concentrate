@@ -358,7 +358,7 @@
         payload.brand = this.get("brand");
         payload.type = this.get("type");
         payload.photos = this.get("photos") || [];
-        payload.pricing = this.get("pricing");
+        payload.pricing = this.$$(".concentrateSealedPricelist").readManifest();
 
         // handle test results
         if (this.get("tests") !== undefined && this.get("tests") != null) {
@@ -395,8 +395,7 @@
        */
       readZeroStateForm: function() {
         var payload = {},
-            priceValue = this.$$("#editablePrice").price,
-            priceAvailable = this.$$("#editablePrice").available,
+            pricelistObj = this.$$("#editablePrice"),
             pricelist = {},
             mi, mpayload, testing;
 
@@ -417,12 +416,7 @@
           };
         }
 
-        payload.pricing = {
-          unit: {
-            available: priceAvailable,
-            value: priceValue
-          }
-        }
+        payload.pricing = pricelistObj.readManifest();
 
         // handle optional fields
         if (this.$$("#premiumToggle").checked) {
