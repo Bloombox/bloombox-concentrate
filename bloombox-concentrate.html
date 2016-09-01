@@ -70,10 +70,10 @@
     </style>
 
     <template is="dom-if" if="[[!zerostate]]" strip-whitespace>
-      <paper-card heading="[[_renderBrand()]][[name]]" class="product-card concentrate-product data-content fullwidth">
+      <div class="product-card concentrate-card">
         <div class="card-content">
           <div class="name-row">
-            <h2>[[name]]</h2> 
+            <h2>[[brand]]: [[name]]</h2>
 
             <!-- Stock Flags -->
             <div class="stock-flags concentrate-info test-info row">
@@ -139,14 +139,14 @@
           <paper-icon-button id="markAsOutOfStockButton" on-tap="markAsOutOfStock" icon="block" hidden$="[[!visible]]"></paper-icon-button>
           <paper-tooltip for="markAsOutOfStockButton" position="left">Mark as Out-of-Stock</paper-tooltip>
         </div>
-      </paper-card><!-- end paper-card.product-card.data-content.concentrate-product -->
+      </div><!-- end div.product-card.concentrate-card -->
     </template>
 
     <!-- - - - - - - - - - - -->
     <!-- Zero-State  Content -->
     <!-- - - - - - - - - - - -->
     <template is="dom-if" if="[[zerostate]]" strip-whitespace restamp>
-      <paper-card heading="Concentrate" class="product-card concentrate-product zerostate fullwidth">
+      <div class="product-card concentrate-card zerostate">
         <div class="card-content">
           <div class="basic-info row">
             <!-- Name & Description -->
@@ -249,7 +249,7 @@
             <paper-tooltip for="cancelButton" position="left">Cancel Edits</paper-tooltip>
           </div><!-- end .edible-zerostate-actions.card-actions -->
         </template>
-      </div><!-- end paper-card.product-card.zerostate.edible-product -->
+      </div><!-- end div.product-card.zerostate.concentrate-product -->
     </template>
   </template>
 
