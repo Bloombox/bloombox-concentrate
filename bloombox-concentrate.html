@@ -75,28 +75,29 @@
           <div class="name-row">
             <h2>[[name]]</h2> 
 
-          <!-- Stock Flags -->
-          <div class="stock-flags concentrate-info test-info row">
-            <div class="base-flags">
-              <!-- MPMH -->
-              <iron-label class="premium-label" hidden$="[[!premium]]"><span>[[_renderPremiumLabel(partner)]]</span></iron-label>
+            <!-- Stock Flags -->
+            <div class="stock-flags concentrate-info test-info row">
+              <div class="base-flags">
+                <!-- MPMH -->
+                <iron-label class="premium-label" hidden$="[[!premium]]"><span>[[_renderPremiumLabel(partner)]]</span></iron-label>
 
-              <!-- Sale -->
-              <iron-label class="sale-label" hidden$="[[!sale]]"><span>[[sale]]% OFF</span></iron-label>
+                <!-- Sale -->
+                <iron-label class="sale-label" hidden$="[[!sale]]"><span>[[sale]]% OFF</span></iron-label>
 
-              <!-- Buy-One-Get-One -->
-              <iron-label class="bogo-label" hidden$="[[!bogo]]"><span>Buy One Get One</span></iron-label>
+                <!-- Buy-One-Get-One -->
+                <iron-label class="bogo-label" hidden$="[[!bogo]]"><span>Buy One Get One</span></iron-label>
 
-              <!-- Type Label -->
-              <iron-label class="type-label"><span>[[_renderTypeLabel(type)]]</span></iron-label>
-            </div>
+                <!-- Type Label -->
+                <iron-label class="type-label"><span>[[_renderTypeLabel(type)]]</span></iron-label>
+              </div>
 
-            <!-- Test Results -->
-            <bloombox-testing
-              mode="basic"
-              thc="[[tests.thc]]"
-              cbd="[[tests.cbd]]"></bloombox-testing>
-          </div><!-- end div.row.stock-flags -->
+              <!-- Test Results -->
+              <bloombox-testing
+                mode="basic"
+                thc="[[tests.thc]]"
+                cbd="[[tests.cbd]]"></bloombox-testing>
+            </div><!-- end div.row.stock-flags -->
+          </div><!-- end div.name-row -->
 
           <!-- Description -->
           <div class="row description-container">
@@ -236,7 +237,7 @@
         <!-- Actions -->
         <template is="dom-if" if="[[editing]]" strip-whitespace>
           <div class="zerostate-actions edible-zerostate-actions card-actions row">
-        <paper-icon-button
+            <paper-icon-button
               id="saveButton"
               icon="save"
               on-tap="commitEdits"></paper-icon-button>
