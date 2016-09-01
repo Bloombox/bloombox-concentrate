@@ -37,7 +37,7 @@
 
 
 <dom-module id="bloombox-concentrate">
-  <template>
+  <template strip-whitespace>
     <style is="custom-style" include="bloombox-styles">
       :root {
         --paper-icon-button-ink-color: green;
@@ -69,7 +69,7 @@
       }
     </style>
 
-    <template is="dom-if" if="[[!zerostate]]">
+    <template is="dom-if" if="[[!zerostate]]" strip-whitespace>
       <paper-card heading="[[_renderBrand()]][[name]]" class="product-card concentrate-product data-content fullwidth">
         <div class="card-content">
           <div class="name-row">
@@ -122,7 +122,7 @@
               manifest="[[_formatManifest(pricing)]]"
               currency="$"></bloombox-pricelist>
           </div><!-- end div.row.pricelist -->
-          <template is="dom-if" if="[[!visible]]">
+          <template is="dom-if" if="[[!visible]]" strip-whitespace>
             <div class="not-in-stock-overlay not-in-stock"></div><!-- end div.not-in-stock-overlay -->
           </template>
         </div><!-- end div.card-content -->
@@ -145,7 +145,7 @@
     <!-- - - - - - - - - - - -->
     <!-- Zero-State  Content -->
     <!-- - - - - - - - - - - -->
-    <template is="dom-if" if="[[zerostate]]">
+    <template is="dom-if" if="[[zerostate]]" strip-whitespace restamp>
       <paper-card heading="Concentrate" class="product-card concentrate-product zerostate fullwidth">
         <div class="card-content">
           <div class="basic-info row">
@@ -179,7 +179,7 @@
               <div class="sale-toggle-container">
                 <paper-checkbox id="saleToggle" checked="[[_isOnSale()]]" on-tap="_toggleSale" class="form-item sale-toggle" noink>On Sale</paper-checkbox>
               </div><!-- end .sale-toggle-container -->
-              <template is="dom-if" if="{{sale}}">
+              <template is="dom-if" if="{{sale}}" restamp strip-whitespace>
                 <div class="sale-amount-container">
                   <paper-slider id="saleValue" pin value="{{sale}}" max="95" min="5" editable step="5" class="form-item"></paper-slider>
                 </div><!-- end .sale-amount-container -->
@@ -200,7 +200,7 @@
 
             <paper-checkbox id="testsToggle" checked="[[_hasKnownTestResults()]]" on-tap="_toggleTests" class="form-item tests-toggle" noink>Test Results</paper-checkbox>
             <div class="test-results-container">
-              <template is="dom-if" if="{{tests}}">
+              <template is="dom-if" if="{{tests}}" restamp strip-whitespace>
                 <bloombox-testing
                   id="productTesting"
                   zerostate
@@ -234,7 +234,7 @@
         </div><!-- end div.card-content -->
 
         <!-- Actions -->
-        <template is="dom-if" if="[[editing]]">
+        <template is="dom-if" if="[[editing]]" strip-whitespace>
           <div class="zerostate-actions edible-zerostate-actions card-actions row">
         <paper-icon-button
               id="saveButton"
