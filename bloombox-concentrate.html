@@ -323,24 +323,27 @@
        * Render a human-readable label for a `type`.
        */
       _renderTypeLabel: function(type) {
-        if (type.indexOf("-oil") != -1) {
-          return "Oil";
-        }
-        if (type.indexOf("-wax") != -1) {
-          return "Wax";
-        }
-        if (type.indexOf("-shatter") != -1) {
-          return "Shatter";
-        }
-        if (type.indexOf("-kief") != -1) {
-          return "Kief";
-        }
-        if (type.indexOf("hash-") == 0) {
-          if (type.indexOf("-traditional") != -1) {
-            return "Hash: Traditional";
+        if (typeof type === "string") {
+          if (type.indexOf("-oil") != -1) {
+            return "Oil";
           }
-          return "Hash: Bubble";
+          if (type.indexOf("-wax") != -1) {
+            return "Wax";
+          }
+          if (type.indexOf("-shatter") != -1) {
+            return "Shatter";
+          }
+          if (type.indexOf("-kief") != -1) {
+            return "Kief";
+          }
+          if (type.indexOf("hash-") == 0) {
+            if (type.indexOf("-traditional") != -1) {
+              return "Hash: Traditional";
+            }
+            return "Hash: Bubble";
+          }
         }
+        return "";
       },
 
       /**
