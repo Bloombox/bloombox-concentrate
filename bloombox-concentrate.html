@@ -89,6 +89,11 @@
 
                 <!-- Type Label -->
                 <iron-label class="type-label"><span>[[_renderTypeLabel(type)]]</span></iron-label>
+
+                <!-- Species -->
+                <template is="dom-if" if="[[species]]" strip-whitespace restamp>
+                  <iron-label class="species-label"><span>[[_renderSpeciesLabel(species)]]</span></iron-label>
+                </template>
               </div>
 
               <!-- Test Results -->
@@ -119,7 +124,7 @@
           <!-- Price List -->
           <div class="row pricelist">
             <bloombox-pricelist
-              class="concentrateSealedPricelist"
+              class="concentrateSealedPricelist concentratePricelist"
               manifest="[[_formatManifest(pricing)]]"
               currency="$"></bloombox-pricelist>
           </div><!-- end div.row.pricelist -->
@@ -160,10 +165,23 @@
                 <paper-item key="concentrate-wax">Wax</paper-item>
                 <paper-item key="concentrate-shatter">Shatter</paper-item>
                 <paper-item key="concentrate-kief">Kief</paper-item>
-                <paper-item key="hash-traditional">Hash (Traditional)</paper-item>
-                <paper-item key="hash-bubble">Hash (Bubble)</paper-item>
+                <paper-item key="hash">Hash</paper-item>
+                <paper-item key="live-resin">Live Resin</paper-item>
+                <paper-item key="rosin">Rosin</paper-item>
               </paper-listbox>
             </paper-dropdown-menu><!-- end paper-dropdown-menu#typeField -->
+
+            <!-- Species -->
+            <paper-dropdown-menu id="speciesField" label="Species" class="form-item" noink auto-validate required name="species">
+              <paper-listbox class="dropdown-content" selected="[[species]]" attr-for-selected="key">
+                <paper-item key="Indica">Indica</paper-item>
+                <paper-item key="Hybrid (Indica Dominant)">Hybrid (Indica Dominant)</paper-item>
+                <paper-item key="Hybrid (No Dominance)">Hybrid (No Dominance)</paper-item>
+                <paper-item key="Hybrid (Sativa Dominant)">Hybrid (Sativa Dominant)</paper-item>
+                <paper-item key="Sativa">Sativa</paper-item>
+                <paper-item key="Unspecified" class="unspecified-item-value">Unspecified</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
           </div><!-- end .row.basic-info -->
 
           <!-- Pricing/Sale Flags -->
@@ -230,6 +248,7 @@
           <div class="row pricelist">
             <bloombox-pricelist
               id="editablePrice"
+              class="concentratePricelist"
               editable
               manifest="[[_formatManifest(pricing)]]"
               currency="$"></bloombox-pricelist>
@@ -283,8 +302,9 @@
          * - `concentrate-wax`
          * - `concentrate-shatter`
          * - `concentrate-kief`
-         * - `hash-traditional`
-         * - `hash-bubble`
+         * - `hash`
+         * - `live-resin`
+         * - `rosin`
          */
         type: {
           type: String,
@@ -341,10 +361,13 @@
             return "Kief";
           }
           if (type.indexOf("hash-") == 0) {
-            if (type.indexOf("-traditional") != -1) {
-              return "Hash: Traditional";
-            }
-            return "Hash: Bubble";
+            return "Hash";
+          }
+          if (type.indexOf("resin") != -1) {
+            return "Live Resin";
+          }
+          if (type.indexOf("rosin") != -1) {
+            return "Rosin";
           }
         }
         return "";
@@ -355,14 +378,16 @@
        * or comparing with edits.
        */
       readObjectData: function() {
-        var payload = {};
+        var payload = {},
+            pricelist = this.$$(".concentratePricelist");
 
         // handle required fields
         payload.name = this.get("name");
         payload.brand = this.get("brand");
         payload.type = this.get("type");
+        payload.species = this.get("species");
         payload.photos = this.get("photos") || [];
-        payload.pricing = this.$$(".concentrateSealedPricelist").readManifest(true);
+        payload.pricing = pricelist.readManifest(true);
 
         // handle test results
         if (this.get("tests") !== undefined && this.get("tests") != null) {
@@ -420,6 +445,7 @@
         // handle required fields
         payload.name = this.$$("#nameField").value;
         payload.brand = this.$$("#brandField").value;
+        payload.species = this.$$("#speciesField").value;
         payload.type = this.$$("#typeField").selectedItem.getAttribute("key");
 
         if (this.get("photos") && this.get("photos").length > 0)
@@ -461,7 +487,7 @@
           payload.flags = payload.flags || {};
           payload.flags.sale = null;
         }
-        if (this.$$("#descriptionField").value !== undefined && this.$$("#descriptionField").value.length > 0) {
+        if (this.$$("#descriptionField") && this.$$("#descriptionField").value !== undefined && this.$$("#descriptionField").value.length > 0) {
           payload.description = this.$$("#descriptionField").value;
         } else {
           payload.description = null;  // clear any current description
