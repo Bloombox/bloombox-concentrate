@@ -256,7 +256,7 @@
               id="editablePrice"
               class="concentratePricelist"
               editable
-              manifest="[[_formatManifest(pricing)]]"
+              manifest="{{pricing}}"
               currency="$"></bloombox-pricelist>
           </div><!-- end div.row.pricelist -->
         </div><!-- end div.card-content -->
@@ -344,7 +344,7 @@
         reformatted = [];
         for (i in pricelist) {
           v = pricelist[i];
-          reformatted.push({"label": i, "available": v.available, "price": v.value});
+          reformatted.push({"label": i, "available": v.available || false, "price": v.value});
         }
         return reformatted;
       },
