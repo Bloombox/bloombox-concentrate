@@ -73,7 +73,7 @@
       <div class="product-card concentrate-card">
         <div class="card-content">
           <div class="name-row">
-            <h2>[[brand]]: [[name]]</h2>
+            <h2>[[brand]] [[name]]</h2>
 
             <!-- Stock Flags -->
             <div class="stock-flags concentrate-info test-info row">
@@ -354,29 +354,29 @@
        */
       _renderTypeLabel: function(type) {
         if (typeof type === "string") {
-          if (type.indexOf("-oil") != -1) {
+          if (type.indexOf("-oil") !== -1 || type.indexOf("Oil") !== -1) {
             return "Oil";
           }
-          if (type.indexOf("-wax") != -1) {
+          if (type.indexOf("-wax") !== -1 || type.indexOf("Wax") !== -1) {
             return "Wax";
           }
-          if (type.indexOf("-shatter") != -1) {
+          if (type.indexOf("-shatter") !== -1 || type.indexOf("Shatter") !== -1) {
             return "Shatter";
           }
-          if (type.indexOf("-kief") != -1) {
+          if (type.indexOf("-kief") !== -1 || type.indexOf("Kief") !== -1) {
             return "Kief";
           }
-          if (type.indexOf("hash-") == 0) {
+          if (type.indexOf("hash-") == 0 || type.indexOf("Hash") !== -1) {
             return "Hash";
           }
-          if (type.indexOf("resin") != -1) {
+          if (type.indexOf("resin") !== -1 || type.indexOf("Resin") !== -1) {
             return "Live Resin";
           }
-          if (type.indexOf("rosin") != -1) {
+          if (type.indexOf("rosin") !== -1 || type.indexOf("Rosin") !== -1) {
             return "Rosin";
           }
         }
-        return "";
+        return "Unspecified Type";
       },
 
       /**
@@ -476,7 +476,7 @@
           };
         }
 
-        payload.pricing = pricelistObj.readManifest(true);
+        payload.pricing = pricelistObj.readManifest();
 
         // handle optional fields
         if (this.$$("#premiumToggle").checked) {
